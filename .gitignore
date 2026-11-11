@@ -1,0 +1,10 @@
+# Secrets and local config
+.env
+.env.*
+*.pem
+.shopify/
+
+# Dependencies and OS files
+node_modules/
+.DS_Store
+Thumbs.db

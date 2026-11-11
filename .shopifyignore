@@ -1,0 +1,6 @@
+# Files Shopify CLI should not upload to the store
+docs/**
+.github/**
+README.md
+CLAUDE.md
+.theme-check.yml

@@ -1,0 +1,6 @@
+# Shopify Theme Check config: https://shopify.dev/docs/storefronts/themes/tools/theme-check
+# Uses the recommended defaults.
+extends: theme-check:recommended
+ignore:
+  - docs/**
+  - node_modules/**

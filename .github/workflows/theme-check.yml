@@ -1,0 +1,23 @@
+name: Theme Check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  theme-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skip until theme files exist
+        id: guard
+        run: |
+          if [ -d layout ] && [ -d templates ]; then echo "run=true" >> "$GITHUB_OUTPUT"; else echo "No theme files yet, skipping."; fi
+      - uses: actions/setup-node@v4
+        if: steps.guard.outputs.run == 'true'
+        with:
+          node-version: 20
+      - name: Run Theme Check
+        if: steps.guard.outputs.run == 'true'
+        run: npx --yes @shopify/cli@latest theme check --fail-level error

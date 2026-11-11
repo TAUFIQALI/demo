@@ -1,6 +1,8 @@
 # Haukao Storefront Redesign: Design and Implementation Brief
 
-Status: proposal, not yet checked against the live store.
+Status: proposal. A public-site audit was done on 2026-11-11; see `docs/phase-0-audit.md`. Admin, theme code and analytics are still not inspected.
+
+> **Audit update:** the live theme is a custom theme ("Bright Marketplace", schema "Base"), not Horizon/Dawn. The store has **0 published products**, and the homepage shows **placeholder products with prices**. Refining the existing theme (Route A) is still recommended, but removing the placeholder products and unverified copy comes first.
 Prepared for: the Haukao merchant and Shopify Sidekick.
 
 ---

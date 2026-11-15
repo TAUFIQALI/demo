@@ -11,24 +11,33 @@
     --accent:#C8321E; --accent-hover:#991B1B; --accent-tint:#FEF2F2;
     --bg:#FAFAF9; --surface:#FFFFFF; --text:#171717; --text-2:#626262;
     --border:#E7E5E4; --border-control:#8A8580; --success:#15803D;
+    --accent-text:#C8321E; --img:#F5F5F4; --hero-to:#FEF2F2; --footer:#171717; --toast-bg:#F0FDF4; --toast-bd:#BBF7D0;
+    color-scheme:light;
     --r-sm:8px; --r-md:12px;
   }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--accent:#C8321E; --accent-hover:#E04A35; --accent-text:#F87171; --accent-tint:#2A1715;
+    --bg:#141414; --surface:#1F1F1F; --text:#F5F5F4; --text-2:#A8A29E;
+    --border:#2E2B29; --border-control:#78716C; --success:#4ADE80; --img:#2A2826; --hero-to:#2A1715; --footer:#0A0A0A; --toast-bg:#052E16; --toast-bd:#14532D; color-scheme:dark}}
+  :root[data-theme="dark"]{--accent:#C8321E; --accent-hover:#E04A35; --accent-text:#F87171; --accent-tint:#2A1715;
+    --bg:#141414; --surface:#1F1F1F; --text:#F5F5F4; --text-2:#A8A29E;
+    --border:#2E2B29; --border-control:#78716C; --success:#4ADE80; --img:#2A2826; --hero-to:#2A1715; --footer:#0A0A0A; --toast-bg:#052E16; --toast-bd:#14532D; color-scheme:dark}
   *{box-sizing:border-box;margin:0}
   body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;font-size:16px}
   a{color:inherit;text-decoration:none}
   :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .wrap{max-width:1280px;margin:0 auto;padding:0 16px}
   @media(min-width:768px){.wrap{padding:0 32px}}
-  .note{background:var(--text);color:#fff;font-size:13px;text-align:center;padding:8px 16px}
+  .note{background:#171717;color:#fff;font-size:13px;text-align:center;padding:8px 16px}
 
   /* Header */
   header{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:5}
   .bar{display:flex;align-items:center;gap:16px;height:68px}
-  .logo{font-weight:600;letter-spacing:.08em;color:var(--accent);font-size:20px}
-  .search{flex:1;display:flex;align-items:center;gap:8px;border:1px solid var(--border-control);border-radius:var(--r-sm);padding:0 14px;height:44px;background:#fff;max-width:640px}
+  .logo{font-weight:600;letter-spacing:.08em;color:var(--accent-text);font-size:20px}
+  .search{flex:1;display:flex;align-items:center;gap:8px;border:1px solid var(--border-control);border-radius:var(--r-sm);padding:0 14px;height:44px;background:var(--surface);max-width:640px}
   .search input{border:0;outline:0;font:inherit;flex:1;min-width:0;background:transparent}
   .search:focus-within{outline:2px solid var(--accent);outline-offset:2px}
   .icons{display:flex;gap:4px;margin-left:auto}
+  .theme-btn{border:1px solid var(--border-control);background:var(--surface);color:var(--text);font:inherit;font-size:14px;cursor:pointer}
   .icon{width:44px;height:44px;display:grid;place-items:center;border-radius:var(--r-sm);position:relative}
   .icon:hover{background:var(--bg)}
   .count{position:absolute;top:6px;right:4px;background:var(--accent);color:#fff;font-size:11px;font-weight:600;border-radius:999px;padding:0 5px;line-height:16px}
@@ -38,21 +47,21 @@
   @media(max-width:700px){.bar{flex-wrap:wrap;height:auto;padding:10px 0}.search{order:3;flex-basis:100%;max-width:none}}
 
   /* Hero */
-  .hero{margin:24px 0;border-radius:16px;background:linear-gradient(135deg,#FFFFFF 0%,#FEF2F2 100%);border:1px solid var(--border);padding:48px 24px}
+  .hero{margin:24px 0;border-radius:16px;background:linear-gradient(135deg,var(--surface) 0%,var(--hero-to) 100%);border:1px solid var(--border);padding:48px 24px}
   @media(min-width:768px){.hero{padding:72px 56px}}
   .hero h1{font-size:clamp(30px,5vw,48px);line-height:1.1;letter-spacing:-.02em;font-weight:600;max-width:14ch}
   .hero p{color:var(--text-2);margin:12px 0 28px;max-width:44ch;font-size:18px}
   .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:var(--r-sm);font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;transition:background .18s ease-out,border-color .18s}
   .btn-primary{background:var(--accent);color:#fff}
   .btn-primary:hover{background:var(--accent-hover)}
-  .btn-secondary{background:#fff;color:var(--text);border-color:var(--border-control);margin-left:8px}
+  .btn-secondary{background:var(--surface);color:var(--text);border-color:var(--border-control);margin-left:8px}
   .btn-secondary:hover{background:var(--bg)}
 
   /* Sections */
   section{padding:40px 0}
   .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
   h2{font-size:clamp(22px,3vw,28px);font-weight:600;letter-spacing:-.01em}
-  .link{color:var(--accent);font-weight:600;font-size:15px}
+  .link{color:var(--accent-text);font-weight:600;font-size:15px}
   .link:hover{text-decoration:underline}
 
   .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
@@ -66,14 +75,14 @@
   @media(min-width:1100px){.grid{grid-template-columns:repeat(4,1fr)}}
   .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .18s}
   @media(hover:hover){.card:hover{box-shadow:0 4px 16px rgba(23,23,23,.06)}}
-  .img{aspect-ratio:1/1;background:#F5F5F4;display:grid;place-items:center;color:#A8A29E;font-size:13px;position:relative}
+  .img{aspect-ratio:1/1;background:var(--img);display:grid;place-items:center;color:#A8A29E;font-size:13px;position:relative}
   .badge{position:absolute;top:10px;left:10px;background:var(--accent);color:#fff;font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px}
-  .badge.out{background:var(--text)}
+  .badge.out{background:#171717;box-shadow:0 0 0 1px #57534E}
   .body{padding:12px;display:flex;flex-direction:column;gap:6px;flex:1}
   .title{font-size:15px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .price{font-weight:600}
   .price s{color:var(--text-2);font-weight:400;font-size:14px;margin-left:6px}
-  .price .sale{color:var(--accent)}
+  .price .sale{color:var(--accent-text)}
   .card .btn{margin-top:auto;min-height:44px;width:100%}
   .btn[disabled]{background:var(--border);color:var(--text-2);cursor:not-allowed}
 
@@ -90,9 +99,9 @@
   .promise div{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:20px}
   .promise b{display:block;margin-bottom:4px}
   .promise p{color:var(--text-2);font-size:14px}
-  .toast{display:inline-flex;gap:8px;align-items:center;background:#F0FDF4;color:var(--success);border:1px solid #BBF7D0;border-radius:var(--r-sm);padding:10px 14px;font-weight:600;font-size:14px}
+  .toast{display:inline-flex;gap:8px;align-items:center;background:var(--toast-bg);color:var(--success);border:1px solid var(--toast-bd);border-radius:var(--r-sm);padding:10px 14px;font-weight:600;font-size:14px}
 
-  footer{background:var(--text);color:#fff;margin-top:40px;padding:40px 0;font-size:14px}
+  footer{background:var(--footer);color:#fff;margin-top:40px;padding:40px 0;font-size:14px}
   footer .cols{display:grid;gap:24px;grid-template-columns:repeat(2,1fr)}
   @media(min-width:768px){footer .cols{grid-template-columns:repeat(4,1fr)}}
   footer h3{font-size:14px;margin-bottom:10px}
@@ -116,8 +125,9 @@
         <input type="search" placeholder="Search Haukao">
       </label>
       <div class="icons">
-        <a class="icon" href="#" aria-label="Account"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></a>
-        <a class="icon" href="#" aria-label="Basket, 2 items"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="1.8" aria-hidden="true"><path d="M5 8h14l-1.5 12h-11z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="count">2</span></a>
+        <button class="icon theme-btn" id="themeBtn" type="button" aria-label="Switch to dark mode">🌙</button>
+        <a class="icon" href="#" aria-label="Account"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></a>
+        <a class="icon" href="#" aria-label="Basket, 2 items"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 8h14l-1.5 12h-11z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="count">2</span></a>
       </div>
     </div>
     <nav class="cats" aria-label="Categories">
@@ -180,6 +190,19 @@
       <div class="sw"><div style="background:#8A8580"></div><p><b>Form border</b>#8A8580<br><span>3.7:1</span></p></div>
       <div class="sw"><div style="background:#15803D"></div><p><b>Success</b>#15803D<br><span>5.0:1</span></p></div>
     </div>
+    <h3 style="margin:28px 0 12px;font-size:18px">Dark mode</h3>
+    <div class="swatches">
+      <div class="sw"><div style="background:#C8321E"></div><p><b>Button</b>#C8321E<br><span>Same red; white text 5.3:1</span></p></div>
+      <div class="sw"><div style="background:#E04A35"></div><p><b>Button hover</b>#E04A35<br><span>Lightens on dark</span></p></div>
+      <div class="sw"><div style="background:#F87171"></div><p><b>Red text / links</b>#F87171<br><span>6.0:1 on surface</span></p></div>
+      <div class="sw"><div style="background:#141414"></div><p><b>Background</b>#141414<br><span>Not pure black</span></p></div>
+      <div class="sw"><div style="background:#1F1F1F"></div><p><b>Surface</b>#1F1F1F<br><span>Cards, header</span></p></div>
+      <div class="sw"><div style="background:#F5F5F4"></div><p><b>Main text</b>#F5F5F4<br><span>16.9:1</span></p></div>
+      <div class="sw"><div style="background:#A8A29E"></div><p><b>Secondary text</b>#A8A29E<br><span>6.5:1</span></p></div>
+      <div class="sw"><div style="background:#2E2B29"></div><p><b>Border</b>#2E2B29<br><span>Decorative</span></p></div>
+      <div class="sw"><div style="background:#78716C"></div><p><b>Form border</b>#78716C<br><span>3.4:1</span></p></div>
+      <div class="sw"><div style="background:#4ADE80"></div><p><b>Success</b>#4ADE80<br><span>9.5:1</span></p></div>
+    </div>
   </section>
 </main>
 
@@ -194,5 +217,15 @@
     <small>© 2026 Haukao</small>
   </div>
 </footer>
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeBtn');
+  function isDark(){var t=root.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches}
+  function sync(){var d=isDark();btn.textContent=d?'☀️':'🌙';btn.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode')}
+  try{var saved=localStorage.getItem('hk-theme');if(saved)root.setAttribute('data-theme',saved)}catch(e){}
+  btn.addEventListener('click',function(){var n=isDark()?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('hk-theme',n)}catch(e){}sync()});
+  sync();
+})();
+</script>
 </body>
 </html>

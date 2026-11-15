@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Haukao Palette Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#C8321E; --accent-hover:#991B1B; --accent-tint:#FEF2F2;
+    --bg:#FAFAF9; --surface:#FFFFFF; --text:#171717; --text-2:#626262;
+    --border:#E7E5E4; --border-control:#8A8580; --success:#15803D;
+    --r-sm:8px; --r-md:12px;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;font-size:16px}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 16px}
+  @media(min-width:768px){.wrap{padding:0 32px}}
+  .note{background:var(--text);color:#fff;font-size:13px;text-align:center;padding:8px 16px}
+
+  /* Header */
+  header{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:5}
+  .bar{display:flex;align-items:center;gap:16px;height:68px}
+  .logo{font-weight:600;letter-spacing:.08em;color:var(--accent);font-size:20px}
+  .search{flex:1;display:flex;align-items:center;gap:8px;border:1px solid var(--border-control);border-radius:var(--r-sm);padding:0 14px;height:44px;background:#fff;max-width:640px}
+  .search input{border:0;outline:0;font:inherit;flex:1;min-width:0;background:transparent}
+  .search:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+  .icons{display:flex;gap:4px;margin-left:auto}
+  .icon{width:44px;height:44px;display:grid;place-items:center;border-radius:var(--r-sm);position:relative}
+  .icon:hover{background:var(--bg)}
+  .count{position:absolute;top:6px;right:4px;background:var(--accent);color:#fff;font-size:11px;font-weight:600;border-radius:999px;padding:0 5px;line-height:16px}
+  nav.cats{display:flex;gap:24px;overflow-x:auto;padding:0 0 12px;font-size:15px;scrollbar-width:none}
+  nav.cats a{white-space:nowrap;color:var(--text-2);padding:6px 0;border-bottom:2px solid transparent}
+  nav.cats a:hover,nav.cats a[aria-current]{color:var(--text);border-color:var(--accent)}
+  @media(max-width:700px){.bar{flex-wrap:wrap;height:auto;padding:10px 0}.search{order:3;flex-basis:100%;max-width:none}}
+
+  /* Hero */
+  .hero{margin:24px 0;border-radius:16px;background:linear-gradient(135deg,#FFFFFF 0%,#FEF2F2 100%);border:1px solid var(--border);padding:48px 24px}
+  @media(min-width:768px){.hero{padding:72px 56px}}
+  .hero h1{font-size:clamp(30px,5vw,48px);line-height:1.1;letter-spacing:-.02em;font-weight:600;max-width:14ch}
+  .hero p{color:var(--text-2);margin:12px 0 28px;max-width:44ch;font-size:18px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:var(--r-sm);font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;transition:background .18s ease-out,border-color .18s}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-hover)}
+  .btn-secondary{background:#fff;color:var(--text);border-color:var(--border-control);margin-left:8px}
+  .btn-secondary:hover{background:var(--bg)}
+
+  /* Sections */
+  section{padding:40px 0}
+  .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
+  h2{font-size:clamp(22px,3vw,28px);font-weight:600;letter-spacing:-.01em}
+  .link{color:var(--accent);font-weight:600;font-size:15px}
+  .link:hover{text-decoration:underline}
+
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(min-width:900px){.tiles{grid-template-columns:repeat(6,1fr)}}
+  .tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:16px 12px;text-align:center;font-weight:600;font-size:14px;transition:border-color .18s,box-shadow .18s}
+  .tile .ico{width:48px;height:48px;margin:0 auto 10px;border-radius:12px;background:var(--accent-tint);display:grid;place-items:center;font-size:22px}
+  .tile:hover{border-color:var(--accent)}
+
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr);gap:20px}}
+  @media(min-width:1100px){.grid{grid-template-columns:repeat(4,1fr)}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .18s}
+  @media(hover:hover){.card:hover{box-shadow:0 4px 16px rgba(23,23,23,.06)}}
+  .img{aspect-ratio:1/1;background:#F5F5F4;display:grid;place-items:center;color:#A8A29E;font-size:13px;position:relative}
+  .badge{position:absolute;top:10px;left:10px;background:var(--accent);color:#fff;font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px}
+  .badge.out{background:var(--text)}
+  .body{padding:12px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .title{font-size:15px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .price{font-weight:600}
+  .price s{color:var(--text-2);font-weight:400;font-size:14px;margin-left:6px}
+  .price .sale{color:var(--accent)}
+  .card .btn{margin-top:auto;min-height:44px;width:100%}
+  .btn[disabled]{background:var(--border);color:var(--text-2);cursor:not-allowed}
+
+  /* Palette */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .sw{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;font-size:13px}
+  .sw div{height:64px}
+  .sw p{padding:8px 10px;line-height:1.35}
+  .sw b{display:block;font-size:14px}
+  .sw span{color:var(--text-2)}
+
+  .promise{display:grid;gap:12px;grid-template-columns:1fr}
+  @media(min-width:768px){.promise{grid-template-columns:repeat(3,1fr)}}
+  .promise div{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:20px}
+  .promise b{display:block;margin-bottom:4px}
+  .promise p{color:var(--text-2);font-size:14px}
+  .toast{display:inline-flex;gap:8px;align-items:center;background:#F0FDF4;color:var(--success);border:1px solid #BBF7D0;border-radius:var(--r-sm);padding:10px 14px;font-weight:600;font-size:14px}
+
+  footer{background:var(--text);color:#fff;margin-top:40px;padding:40px 0;font-size:14px}
+  footer .cols{display:grid;gap:24px;grid-template-columns:repeat(2,1fr)}
+  @media(min-width:768px){footer .cols{grid-template-columns:repeat(4,1fr)}}
+  footer h3{font-size:14px;margin-bottom:10px}
+  footer a{display:block;color:#D6D3D1;padding:3px 0}
+  footer a:hover{color:#fff;text-decoration:underline}
+  footer small{display:block;color:#A8A29E;margin-top:28px}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="note">Palette preview: example layout only. Product names and prices are placeholders, not real listings.</div>
+
+<header>
+  <div class="wrap">
+    <div class="bar">
+      <a class="logo" href="#">HAUKAO</a>
+      <label class="search" aria-label="Search Haukao">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#626262" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" placeholder="Search Haukao">
+      </label>
+      <div class="icons">
+        <a class="icon" href="#" aria-label="Account"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></a>
+        <a class="icon" href="#" aria-label="Basket, 2 items"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="1.8" aria-hidden="true"><path d="M5 8h14l-1.5 12h-11z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="count">2</span></a>
+      </div>
+    </div>
+    <nav class="cats" aria-label="Categories">
+      <a href="#" aria-current="page">Gadgets</a><a href="#">Home</a><a href="#">Kitchen</a><a href="#">Desk</a><a href="#">Travel</a><a href="#">Accessories</a><a href="#">New in</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="MainContent">
+
+  <div class="hero">
+    <h1>Everyday finds, thoughtfully chosen.</h1>
+    <p>Gadgets, home, kitchen and travel essentials, shipped from the UK.</p>
+    <a class="btn btn-primary" href="#">Shop new in</a><a class="btn btn-secondary" href="#">Browse categories</a>
+  </div>
+
+  <section>
+    <div class="head"><h2>Shop by category</h2><a class="link" href="#">See all</a></div>
+    <div class="tiles">
+      <a class="tile" href="#"><div class="ico">🔌</div>Gadgets</a>
+      <a class="tile" href="#"><div class="ico">🏠</div>Home</a>
+      <a class="tile" href="#"><div class="ico">🍳</div>Kitchen</a>
+      <a class="tile" href="#"><div class="ico">🖥️</div>Desk</a>
+      <a class="tile" href="#"><div class="ico">🧳</div>Travel</a>
+      <a class="tile" href="#"><div class="ico">🎒</div>Accessories</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><h2>New in</h2><a class="link" href="#">View all</a></div>
+    <div class="grid">
+      <article class="card"><div class="img">Product image</div><div class="body"><p class="title">Example product name that can run to two lines</p><p class="price">£24.99</p><button class="btn btn-primary">Add to basket</button></div></article>
+      <article class="card"><div class="img"><span class="badge">Sale</span>Product image</div><div class="body"><p class="title">Example product on sale</p><p class="price"><span class="sale">£18.00</span><s>Was £22.00</s></p><button class="btn btn-primary">Add to basket</button></div></article>
+      <article class="card"><div class="img"><span class="badge out">Sold out</span>Product image</div><div class="body"><p class="title">Example sold-out product</p><p class="price">£39.00</p><button class="btn" disabled>Sold out</button></div></article>
+      <article class="card"><div class="img">Product image</div><div class="body"><p class="title">Example product</p><p class="price">£12.50</p><button class="btn btn-primary">Add to basket</button></div></article>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><h2>Why shop at Haukao</h2></div>
+    <div class="promise">
+      <div><b>One place for everyday things</b><p>Gadgets, home, kitchen, desk and travel in a single basket.</p></div>
+      <div><b>Prices in pounds</b><p>Everything is shown in GBP.</p></div>
+      <div><b>Secure checkout</b><p>Pay with Shopify's secure checkout.</p></div>
+    </div>
+    <p style="margin-top:20px"><span class="toast">✓ Added to basket</span></p>
+  </section>
+
+  <section>
+    <div class="head"><h2>The palette</h2></div>
+    <div class="swatches">
+      <div class="sw"><div style="background:#C8321E"></div><p><b>Brand accent</b>#C8321E<br><span>White text 5.3:1</span></p></div>
+      <div class="sw"><div style="background:#991B1B"></div><p><b>Accent hover</b>#991B1B<br><span>White text 8.3:1</span></p></div>
+      <div class="sw"><div style="background:#FEF2F2"></div><p><b>Accent tint</b>#FEF2F2<br><span>Highlights</span></p></div>
+      <div class="sw"><div style="background:#FAFAF9"></div><p><b>Background</b>#FAFAF9<br><span>Page</span></p></div>
+      <div class="sw"><div style="background:#FFFFFF;border-bottom:1px solid #E7E5E4"></div><p><b>Surface</b>#FFFFFF<br><span>Cards, header</span></p></div>
+      <div class="sw"><div style="background:#171717"></div><p><b>Main text</b>#171717<br><span>17:1 on background</span></p></div>
+      <div class="sw"><div style="background:#626262"></div><p><b>Secondary text</b>#626262<br><span>5.8:1</span></p></div>
+      <div class="sw"><div style="background:#E7E5E4"></div><p><b>Border</b>#E7E5E4<br><span>Decorative</span></p></div>
+      <div class="sw"><div style="background:#8A8580"></div><p><b>Form border</b>#8A8580<br><span>3.7:1</span></p></div>
+      <div class="sw"><div style="background:#15803D"></div><p><b>Success</b>#15803D<br><span>5.0:1</span></p></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h3>Shop</h3><a href="#">Gadgets</a><a href="#">Home</a><a href="#">Kitchen</a><a href="#">Desk</a></div>
+      <div><h3>Help</h3><a href="#">Contact us</a><a href="#">Delivery</a><a href="#">Returns</a></div>
+      <div><h3>About</h3><a href="#">About Haukao</a><a href="#">Privacy policy</a><a href="#">Terms of service</a></div>
+      <div><h3>Company</h3><a href="#">[Legal name, address, company no.]</a></div>
+    </div>
+    <small>© 2026 Haukao</small>
+  </div>
+</footer>
+</body>
+</html>
